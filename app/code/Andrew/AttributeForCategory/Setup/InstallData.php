@@ -61,7 +61,7 @@ class InstallData implements InstallDataInterface
         );
 
         /**
-         * Add attribute_code external_id in default attribute set and default attribute group
+         * Add attribute_code external_id in default attribute set and default attribute grouped
          *
          * If there is a store in your properties then use  $eavSetup->addAttributeGroup for add custom attribute in group
          * If this default attribute then use $eavSetup->addAttributeToGroup for add attribute in group
