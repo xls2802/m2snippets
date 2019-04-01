@@ -13,7 +13,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 /**
  * Create new EAV attribute
  *
- * @package Andrew\Attribute\Setup
+ * @package Andrew\AttributeForCategory\Setup
  */
 class InstallData implements InstallDataInterface
 {
@@ -43,19 +43,33 @@ class InstallData implements InstallDataInterface
         /** For version compatibility */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
 
+        /** @var  $attributeCode */
         $attributeCode = 'external_id';
 
         /**
          * For attribute property look at \Magento\Eav\Model\Entity\Setup\PropertyMapperInterface
          *
          * 1. Eav Property Mapper - \Magento\Eav\Model\Entity\Setup\PropertyMapper - main
-         * 2. Catalog Property Mapper - \Magento\Catalog\Model\ResourceModel\Setup\PropertyMapper
+         * 2. Category Property Mapper - \Magento\Catalog\Model\ResourceModel\Setup\PropertyMapper
+         * 3. Configurable Product Property Mapper -
+         *      \Magento\ConfigurableProduct\Model\ResourceModel\Setup\PropertyMapper - this not used in magento 2
          */
 
+        /**
+         * Add attribute for category, look in mysql table eav_attribute
+         * entity_type_code catalog_category
+         * entity_model Magento\Catalog\Model\ResourceModel\Category
+         */
         $eavSetup->addAttribute(CategoryAttributeInterface::ENTITY_TYPE_CODE, $attributeCode,
             [
+                /** 'lable' - Name for attribute 'label' => 'AttributeName' */
                 'label' => 'External ID',
+                /** 'user_defined' - System attributes cannot be deleted, by default every added attribute is
+                system but if you set the user_defined field to true (1) then the attribute
+                will be user-defined and we will be able to remove it. */
                 'user_defined' => 1,
+                /** 'unique' - Specifies the ability to add an attribute with the same name (lable) if 'unique' => true (1),
+                then a new attribute with the same name cannot be created */
                 'unique' => 1,
             ]
         );

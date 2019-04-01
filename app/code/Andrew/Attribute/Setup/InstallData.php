@@ -24,7 +24,7 @@ class InstallData implements InstallDataInterface
 
     /**
      * InstallData constructor.
-     * Do the injection class \Magento\Eav\Setup\EavSetup
+     *
      * @param EavSetup $eavSetup
      */
     public function __construct(EavSetupFactory $eavSetup)
@@ -40,11 +40,10 @@ class InstallData implements InstallDataInterface
         ModuleContextInterface $context
     )
     {
-        /** For version compatibility.
-        Create the \ Magento \ Eav \ Setup \ EavSetup class and add properties to the constructor */
+        /** For version compatibility */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
 
-        /** Add name attribute_code */
+        /** @var  $attributeCode */
         $attributeCode = 'legasy_sku';
 
         /**
@@ -57,56 +56,53 @@ class InstallData implements InstallDataInterface
          */
 
         /**
-         * 'used_in_product_listing' - If true(1), the attribute will display in the category page.
-         * 'used_for_promo_rules'   - Adds an attribute to a flat table
-         * 'used_for_sort_by' - The ability to sort the product by value
-         * 'default' - With this, you can set a default value.
-            When you create a product which has this attribute, it will give a default value for that product.
-         * 'apply_to - Determine the applicability for attribute products
-         * 'comparable' - This option allows you to use this product attribute to make comparisons between different products.
-         * 'filterable' - Define filtering for this attribute
-         * 'visible_on_front' - Determine the ability of the attribute to be visible on the frontend
-
-         * 'lable' - Name for attribute 'label' => 'AttributeName'
-         * 'is_required' -  If required => true(1), then the attribute must have any value when you create a product.
-         * 'user_defined' - System attributes cannot be deleted, by default every added attribute is
-            system but if you set the user_defined field to true (1) then the attribute
-            will be user-defined and we will be able to remove it.
-         * 'unique' - Specifies the ability to add an attribute with the same name (lable) if 'unique' => true (1),
-            then a new attribute with the same name cannot be created
-         * 'visible' - This field determines whether the attribute will be visible in the admin panel or not.
-            If the attribute values ​​are set to 'visible' => true (1), then the attribute will be displayed;
-            if false (0) it will not be displayed.
-         * 'searchable' - We define the ability to search on frontende by the value of this attribute.
-            If the attribute values ​​are true, then the search capability will be enabled for this attribute.
-         * 'visible_in_advanced_search' - If this attribute can be used on the Advanced Search page.
-         * 'group' - Add to attribute Group(tab)
-         * 'sort_order' - We define attribute sorting
+         * 'used_in_product_listing' -
+         * 'used_for_promo_rules'   -   adds an attribute to a flat table
+         * 'used_for_sort_by' -
          */
 
-        /** Add attribute to group if not add store in property global for attribute */
+        /** add attribute to group if not add store in property global for attribute */
         $entityType = ProductAttributeInterface::ENTITY_TYPE_CODE;
-        /** Get id default Attribute Set */
+        /** get id default Attribute Set */
         $setId = $eavSetup->getDefaultAttributeSetId($entityType);
         /** get default group id */
         $groupId = $eavSetup->getDefaultAttributeGroupId($entityType, $setId);
         /** `attribute_group_name` - it's row from table `eav_attribute_group` */
         $groupName = $eavSetup->getAttributeGroup($entityType, $setId, $groupId, 'attribute_group_name');
 
-        /** Write attribute to database */
+        /**
+         * Add attribute for product, look in mysql table eav_attribute
+         * entity_type_code catalog_product
+         * entity_model Magento\Catalog\Model\ResourceModel\Product
+         */
         $eavSetup->addAttribute(
             ProductAttributeInterface::ENTITY_TYPE_CODE,
             $attributeCode,
             [
-                'label' => 'Legasy sku',
-                'is_required' => 0,
-                'user_defined' => 1,
-                'unique' => 1,
-                'visible' => 1,
-                'searchable' => 1,
+                /** 'lable' - Name for attribute 'label' => 'AttributeName' */
+                'label'                      => 'Legasy sku',
+                /** 'is_required' -  If required => true(1), then the attribute must have any value when you create a product. */
+                'is_required'                => 0,
+                /** 'user_defined' - System attributes cannot be deleted, by default every added attribute is
+                system but if you set the user_defined field to true (1) then the attribute
+                will be user-defined and we will be able to remove it. */
+                'user_defined'               => 1,
+                /** 'unique' - Specifies the ability to add an attribute with the same name (lable) if 'unique' => true (1),
+                then a new attribute with the same name cannot be created */
+                'unique'                     => 1,
+                /** 'visible' - This field determines whether the attribute will be visible in the admin panel or not.
+                If the attribute values ​​are set to 'visible' => true (1), then the attribute will be displayed;
+                if false (0) it will not be displayed. */
+                'visible'                    => 1,
+                /** 'searchable' - We define the ability to search on frontende by the value of this attribute.
+                If the attribute values ​​are true, then the search capability will be enabled for this attribute. */
+                'searchable'                 => 1,
+                /** 'visible_in_advanced_search' - If this attribute can be used on the Advanced Search page. */
                 'visible_in_advanced_search' => 1,
-                'group' => $groupName,
-                'sort_order' => 30,
+                /** Add to attribute Group */
+                'group'                      => $groupName,
+                /** 'sort_order' - We define attribute sorting */
+                'sort_order'                 => 30,
             ]
         );
     }
