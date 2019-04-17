@@ -1,5 +1,51 @@
 <?php
 
+/**
+ * Default entity attribute mapper
+ *
+ * 'attribute_model' => 'attribute_model'
+ * 'backend_model' => 'backend' // Allows you to perform certain actions when an attribute is loaded or saved.
+ * 'backend_type' => 'type', defaul value text (varchar) // Attribute type (varchar, text, int, decimal...)
+ * 'backend_table' => 'table' // Additional properties for the attribute
+ * 'frontend_model' => 'frontend' // Defines how it should be rendered on the frontend
+ * 'frontend_input' => 'input' defaul value (text) // Input type (text, textarea, select...)
+ * 'frontend_label' => 'label' // Default label
+ * 'frontend_class' => 'frontend_class' // Tag can be used to modify the class attribute of the form element tag that’s
+ *  generated for your field. That is, this config field allows you to add a Cascading Stylesheet Class (i.e. “frontend” class) to the generated form element.
+ * 'source_model' => 'source' // Use for select attribute value in input
+ * 'is_required' => 'required', defaul value (true) //Is the attribute mandatory?
+ * 'is_user_defined' => 'user_defined', defaul value (false) // Is the attribute user defined? If false the attribute isn't removable. TRUE needed if configurable attribute.
+ * 'default_value' => 'default' // attribute default value
+ * 'is_unique' => 'unique', defaul value (false) // Must attribute values be unique?
+ * 'note' => 'note' // Note below the input field on admin area
+ * 'is_global' => 'global', defaul value (SCOPE_GLOBAL) // Attribute scope
+ */
+
+/**
+ * Catalog attribute property mapper
+ *
+ * 'frontend_input_renderer' => 'input_renderer' // Definition of renderer
+ * 'is_global' => 'global',default value (SCOPE_GLOBAL) // Attribute scope
+ * 'is_visible' => 'visible', default value (true) // Is the attribute visible? If true the field appears in admin product page.
+ * 'is_searchable' => 'searchable', default value (false) // Is the attribute searchable?
+ * 'is_filterable' => 'filterable', default value (false) // Is the attribute filterable? (on frontend, in category view)
+ * 'is_comparable' => 'comparable', default value (false) // Can the attribute be used to create configurable products?
+ * 'is_visible_on_front' => 'visible_on_front', default value (false) // Is the attribute visible on front?
+ * 'is_wysiwyg_enabled' => 'wysiwyg_enabled', default value (false) // Is Wysiwyg enabled? (use `textarea` input if you put that value to true)
+ * 'is_html_allowed_on_front' => 'is_html_allowed_on_front', default value (false) // Is HTML allowed on frontend?
+ * 'is_visible_in_advanced_search' =>'visible_in_advanced_search', default value (false) // Is the attribute visible on advanced search?
+ * 'is_filterable_in_search' => 'filterable_in_search', default value (false) // Is the attribute filterable? (on frontend, in search view)
+ * 'used_in_product_listing' => 'used_in_product_listing', default value (false) // Should we flat this attribute?
+ * 'used_for_sort_by' => 'used_for_sort_by', default value (false) // Can the attribute be used for the 'sort by' select on catalog/search views?
+ * 'apply_to' => 'apply_to' //  Product types
+ * 'position' => 'position', default value (false) // Which position on the admin area form group?
+ * 'is_used_for_promo_rules' => 'used_for_promo_rules', default value (false) // Do we need that attribute for specific promo rules?
+ * 'is_used_in_grid' => 'is_used_in_grid', default value (false) // Whether it is used in customer grid
+ * 'is_visible_in_grid' => 'is_visible_in_grid', default value (false) // Whether it is visible in customer grid
+ * 'is_filterable_in_grid' => 'is_filterable_in_grid', default value (false) // Whether it is filterable in customer grid
+ *
+ */
+
 declare(strict_types=1);
 
 namespace Andrew\Attribute\Setup;
