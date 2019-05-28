@@ -1,6 +1,3 @@
-# EAV section
-* Create Product EAV attribute in `\Andrew\Attribute\Setup\InstallData`
-
 # Declarative Schema:
   * Declaring tables;
   * Apply declarations;
