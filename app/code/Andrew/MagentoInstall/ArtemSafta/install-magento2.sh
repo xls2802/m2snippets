@@ -9,6 +9,8 @@ magentoAdminLogin="admin"
 magentoAdminPass="admin123"
 magentoAdminEmail="admin@admin.com"
 
+PHP=$(which php)
+
 read -p 'Your site url: ' siteUrl
 read -p 'Db Name: ' magentoDbName
 read -p 'Db user: ' magentoDbUser
@@ -17,7 +19,7 @@ read -sp 'Mysql Root Pass: ' mysqlPass
 read -sp 'Db Password: ' magentoDbPass
 
 configMysql(){
-mysql -uroot -p${mysqlPass} <<MYSQL_SCRIPT
+mysql -usafta -p${mysqlPass} <<MYSQL_SCRIPT
 CREATE DATABASE ${magentoDbName};
 CREATE USER '${magentoDbUser}'@'localhost' IDENTIFIED BY '${magentoDbPass}';
 GRANT ALL PRIVILEGES ON ${magentoDbName}.* TO '${magentoDbUser}'@'localhost';
@@ -36,7 +38,7 @@ sudo chown -R ${magentoOwner}:www-data .
 sudo chmod u+x ./bin/magento
 sudo composer install
 
-./bin/magento setup:install \
+${PHP} ./bin/magento setup:install \
 --base-url="http://${siteUrl}/" \
 --db-host="${magentoDbHost}" \
 --db-name="${magentoDbName}" \
@@ -52,7 +54,7 @@ sudo composer install
 --currency="${magentoCurr}" \
 --timezone="${magentoTz}" \
 --use-rewrites=1
-./bin/magento deploy:mode:set developer
+${PHP} ./bin/magento deploy:mode:set developer
 }
 
 
