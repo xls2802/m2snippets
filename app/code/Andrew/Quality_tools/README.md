@@ -43,7 +43,7 @@ vendor/bin/phpcbf --standard=Magento2 app/code/
 - Заходим в Preferences -> Editor -> Inspections -> PHP -> Quality Tools -> PHP Code Sniffer validation для установки правил проверки кода
 - Ставим галочку напротив PHP Code Sniffer validation
 - Выбираем Coding standart: Custom
-- Указываем путь к рулам Магенты: ./dev/tests/static/framework/Magento/ruleset.xml
+- Указываем путь к рулам Магенты: ./vendor/magento/magento-coding-standard/ruleset.xml
 
 
 
