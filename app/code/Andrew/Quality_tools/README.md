@@ -291,3 +291,58 @@ return PhpCsFixer\Config::create()
 После это во время коммита в Phpstorm будет чекбокс Run git hooks. 
 Он должен быть включенным. 
 Будет производится проверка статическим анализатором
+
+#Magento Cache Clean
+
+Утилита которая позволяет  позволяет более быстро сбрасывать кэш и наблюдать изменения в файлах 
+
+Установака
+
+````composer require --dev mage2tv/magento-cache-clean````
+
+Запускаем с помощью команды
+
+````/usr/bin/node /home/artem/.composer/vendor/bin/cache-clean.js -w```` 
+
+Можно использовать hot keys.
+
+
+|Key|Cache Segment(s)|
+|---|----------------|
+|`c`| `config` |
+|`b`| `block_html` |
+|`l`| `layout` |
+|`f`| `full_page` |
+|`a`| (a for all) |
+|`v`| (v for view) `block_html`, `layout`, `full_page` |
+|`t`| `translate` |
+
+Для того чтобы они работали в Phpstorm нажимаем Ctrl + Shift + a
+
+Вводим ````registry````. 
+В списке выбираем ````Registry...````
+
+Включаем чекбокс ````nodejs.console.use.terminal````
+
+Запуск скрипта из Phpstorm
+````Settings->Tools````
+
+Дальше Жмём на плюсик.
+
+Выбираем `node.js`
+
+Называем, например `cache-cleaner`
+
+Указываем `Javascript file` - `vendor/bin/cache-cleaner.js`
+
+`Application parametr` - `-w`
+
+Теперь в правом верхнем углу как для xdebug мы увидим наш скрипт и сможем его запустить
+
+ 
+
+
+
+
+
+    
