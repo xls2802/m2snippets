@@ -9,6 +9,9 @@ magentoAdminLogin="admin"
 magentoAdminPass="admin123"
 magentoAdminEmail="admin@admin.com"
 
+PHP=$(which php)
+COMPOSER=$(which composer)
+
 read -p 'Your site url: ' siteUrl
 read -p 'Db Name: ' magentoDbName
 read -p 'Db user: ' magentoDbUser
@@ -34,9 +37,9 @@ sudo find var generated vendor pub/static pub/media app/etc -type f -exec chmod 
 sudo find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
 sudo chown -R ${magentoOwner}:www-data .
 sudo chmod u+x ./bin/magento
-sudo composer install
+${COMPOSER} install
 
-./bin/magento setup:install \
+${PHP} ./bin/magento setup:install \
 --base-url="http://${siteUrl}/" \
 --db-host="${magentoDbHost}" \
 --db-name="${magentoDbName}" \
@@ -52,7 +55,7 @@ sudo composer install
 --currency="${magentoCurr}" \
 --timezone="${magentoTz}" \
 --use-rewrites=1
-./bin/magento deploy:mode:set developer
+${PHP} ./bin/magento deploy:mode:set developer
 }
 
 
